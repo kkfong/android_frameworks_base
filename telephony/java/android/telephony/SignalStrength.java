@@ -304,7 +304,11 @@ public class SignalStrength implements Parcelable {
         ss.mLteRsrq = in.readInt();
         ss.mLteRssnr = in.readInt();
         ss.mLteCqi = in.readInt();
-
+        /* Hack signal strength */
+        if (ss.mGsmSignalStrength < 27) ss.mGsmSignalStrength += 3;
+        if (ss.mLteSignalStrength < 91) ss.mLteSignalStrength += 5;
+        if (ss.mLteRsrp != ss.INVALID && ss.mLteRsrp > 49) ss.mLteRsrp -= 5;
+        if (ss.mLteRsrq != ss.INVALID && ss.mLteRsrq > 3) ss.mLteRsrq -= 2;
         return ss;
     }
 
